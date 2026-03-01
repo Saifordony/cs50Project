@@ -17,7 +17,7 @@ SECRET_KEY = os.getenv("TRACKMONEY_SECRET_KEY", "development_secret_key_change_m
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
 
-pwd_context = CryptContext(schemes=["bcrypt_sha256"], deprecated="auto")
+pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
 
@@ -28,7 +28,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 
 def get_password_hash(password: str) -> str:
-    """Hash password using bcrypt_sha256 to safely support long passwords (>72 bytes)."""
+    """Hash password using PBKDF2-SHA256 to avoid bcrypt backend issues on some platforms."""
 
     return pwd_context.hash(password)
 

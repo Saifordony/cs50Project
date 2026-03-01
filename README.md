@@ -139,3 +139,5 @@ Frontend: `http://localhost:8501`
 ## Notes
 - SQLite database file is created automatically at `backend/trackmoney.db`.
 - For production, set `TRACKMONEY_SECRET_KEY` environment variable and restrict CORS origins.
+- For Windows users, ensure `bcrypt` installs correctly (included in backend requirements).
+- Password hashing uses `bcrypt_sha256`, which avoids bcrypt's 72-byte password limit.
